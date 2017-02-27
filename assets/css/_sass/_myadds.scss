@@ -1,0 +1,133 @@
+/// Viewport sized typography with minimum and maximum values
+/// @author Eduardo Boucas (@eduardoboucas)
+///
+/// @param {Number}   $responsive  - Viewport-based size
+/// @param {Number}   $min         - Minimum font size (px)
+/// @param {Number}   $max         - Maximum font size (px)
+///                                  (optional)
+/// @param {Number}   $fallback    - Fallback for viewport-
+///                                  based units (optional)
+///
+/// @example scss - 5vw font size (with 50px fallback), 
+///                 minumum of 35px and maximum of 150px
+///  @include responsive-font(5vw, 35px, 150px, 50px);
+///
+@mixin responsive-font($responsive, $min, $max: false, $fallback: false) {
+  $responsive-unitless: $responsive / ($responsive - $responsive + 1);
+  $dimension: if(unit($responsive) == 'vh', 'height', 'width');
+  $min-breakpoint: $min / $responsive-unitless * 100;
+  
+  @media (max-#{$dimension}: #{$min-breakpoint}) {
+    font-size: $min;
+  }
+  
+  @if $max {
+    $max-breakpoint: $max / $responsive-unitless * 100;
+    
+    @media (min-#{$dimension}: #{$max-breakpoint}) {
+      font-size: $max;
+    }
+  }
+  
+  @if $fallback {
+    font-size: $fallback;
+  }
+  
+  font-size: $responsive;
+}
+
+/// Transfer fa icons to oli-font subset
+.oli-envelope:before {
+  content: "\e900";
+}
+.oli-slack:before {
+  content: "\e901";
+}
+.oli-twitter:before {
+  content: "\ea96";
+}
+
+/// Remove Sintony font for teaser page
+body {
+  font-family: 'Play', sans-serif;
+}
+
+.title-home {
+  height: 37.5vw;
+  background: #343434 url('/assets/img/bg/collage4x4-640t.jpg') center/contain;
+  @media only screen and (orientation: portrait) and (max-width: 40em) {
+    height: 100vw;
+  }
+  @media only screen and (min-width: 48em) {
+    background-image: url('/assets/img/bg/collage8x3-1920t.jpg');
+  }
+}
+
+.pre-title,
+.post-title {
+  color: #ddd;
+}
+
+.pre-title {
+  @include responsive-font(2vw, 16px);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.post-title {
+  @include responsive-font(4vw, 24px, 50px);
+  padding-top: 0.5em;
+  .separator {
+    @media only screen and (max-width: 26em) {
+      display: block;
+    }
+  }
+}
+
+h1.big-page-title {
+  @include responsive-font(8vw, 45px, 124px);
+  font-weight: normal;
+}
+
+.block-span {
+  display: inline-block;
+}
+
+p {
+  font-size: 18px;
+}
+
+.top-section {
+  padding-top: 60px;
+  .icon-box p {
+    font-size: 16px;
+  }
+}
+
+.page-intro {
+  font-size: 120%;
+  line-height: 1.8;
+  font-style: italic;
+  text-align: center;
+}
+
+.cta-section p {
+  color: #555;
+}
+
+#footer.dark-wrapper {
+  p {
+    color: #aaa;
+  }
+  a{
+    color: #ddd;
+  }
+  .social-icons a:hover {
+    background-color: #fff;
+  }
+}
+
+.date-block {
+  display: inline-block;
+  font-weight: bold;
+}
