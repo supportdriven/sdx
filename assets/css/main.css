@@ -19695,13 +19695,13 @@ body {
 
 .title-home {
   height: 37.5vw;
-  background: #343434 url("assets/img/bg/collage4x4-640t.jpg") center/contain; }
+  background: #343434 url("../img/bg/collage4x4-640t.jpg") center/contain; }
   @media only screen and (orientation: portrait) and (max-width: 40em) {
     .title-home {
       height: 100vw; } }
   @media only screen and (min-width: 48em) {
     .title-home {
-      background-image: url("assets/img/bg/collage8x3-1920t.jpg"); } }
+      background-image: url("../img/bg/collage8x3-1920t.jpg"); } }
 
 .pre-title,
 .post-title {
